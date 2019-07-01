@@ -1,26 +1,13 @@
 const express = require("express");
-const https = require("https");
-const serializeError = require("serialize-error");
-const get = require("./lib/get");
+const getUser = require("./routes/getUser");
+const getAvatar = require("./routes/getAvatar");
 
 const app = express();
 
-const REGRES_URL = "https://reqres.in/";
+const USER_URL = "/api/user/:userId";
 
-const getUser = async (req, response) => {
-	const { userId } = req.params;
-
-	console.log(userId);
-
-	try {
-		const result = await get(`${REGRES_URL}api/users/${userId}`);
-		response.send(result);
-	} catch (e) {
-		response.send(serializeError(e));
-	}
-};
-
-app.get("/api/user/:userId", getUser);
+app.get(USER_URL, getUser);
+app.get(`${USER_URL}/avatar`, getAvatar);
 
 app.listen(3000, () => {
 	console.log("Example app listening on port 3000!");
