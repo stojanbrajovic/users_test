@@ -11,6 +11,7 @@
 	"license": "ISC",
 	"dependencies": {
 		"express": "^4.17.1",
+		"node-cron": "^2.0.3",
 		"serialize-error": "^4.1.0"
 	},
 	"devDependencies": {

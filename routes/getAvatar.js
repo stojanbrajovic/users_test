@@ -1,7 +1,7 @@
 const fs = require("fs");
 const serializeError = require("serialize-error");
 const get = require("../lib/get");
-const { getUserFromId } = require("./reges");
+const { getUserFromId } = require("../lib/reges");
 
 const AVATARS_PATH = "avatar";
 
@@ -17,7 +17,7 @@ const getAvatar = async (req, res) => {
 
 		if (!avatarBase64) {
 			const userBuffer = await getUserFromId(userId);
-			const user = JSON.parse(userBuffer.toString("utf-8")).data;
+			const user = JSON.parse(userBuffer).data;
 			const { avatar } = user;
 
 			avatarBase64 = await get(avatar);
