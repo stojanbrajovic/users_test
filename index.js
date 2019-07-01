@@ -1,21 +1,22 @@
 const express = require("express");
 const https = require("https");
 const serializeError = require("serialize-error");
+const get = require("./lib/get");
 
 const app = express();
 
-const BASE_URL = "https://reqres.in/";
+const REGRES_URL = "https://reqres.in/";
 
-const getUser = async (req, res) => {
+const getUser = async (req, response) => {
 	const { userId } = req.params;
 
 	console.log(userId);
 
 	try {
-		const result = await https.get(`${BASE_URL}api/users/${userId}`);
-		res.send(JSON.stringify(result));
+		const result = await get(`${REGRES_URL}api/users/${userId}`);
+		response.send(result);
 	} catch (e) {
-		res.send(serializeError(e));
+		response.send(serializeError(e));
 	}
 };
 
