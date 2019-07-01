@@ -1,7 +1,7 @@
 const fs = require("fs");
 const serializeError = require("serialize-error");
 
-const AVATARS_PATH = "avatar";
+const AVATARS_PATH = "avatars/";
 
 const deleteAvatar = async (req, res) => {
 	const { userId } = req.params;
@@ -9,7 +9,7 @@ const deleteAvatar = async (req, res) => {
 	const filePath = `${AVATARS_PATH}${userId}`;
 
 	try {
-		if (fs.existsSync(filePath)) {
+		if (fs.existsSync(AVATARS_PATH) && fs.existsSync(filePath)) {
 			fs.unlinkSync(filePath);
 		}
 

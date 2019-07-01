@@ -3,12 +3,16 @@ const serializeError = require("serialize-error");
 const get = require("../lib/get");
 const { getUserFromId } = require("../lib/reges");
 
-const AVATARS_PATH = "avatar";
+const AVATARS_PATH = "avatars/";
 
 const getAvatar = async (req, res) => {
 	const { userId } = req.params;
 
 	try {
+		if (!fs.existsSync(AVATARS_PATH)) {
+			fs.mkdirSync(AVATARS_PATH);
+		}
+
 		const filePath = `${AVATARS_PATH}${userId}`;
 		let avatarBase64 = null;
 		try {
